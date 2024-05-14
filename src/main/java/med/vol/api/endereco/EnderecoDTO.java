@@ -7,7 +7,7 @@ public class EnderecoDTO {
 
     private String logradouro;
     private String bairro;
-    private Integer cep;
+    private Long cep;
     private String cidade;
     private String uf;
     private Integer numero;
