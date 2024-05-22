@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Bruno Durães
+      changes:
+        - createTable:
+            tableName: paciente
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: nome
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: telefone
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cpf
+                  type: varchar(11)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: logradouro
+                  type: varchar(100)
+              - column:
+                  name: bairro
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cep
+                  type: varchar(9)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: complemento
+                  type: varchar(100)
+              - column:
+                  name: numero
+                  type: varchar(20)
+              - column:
+                  name: uf
+                  type: char(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cidade
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
