@@ -13,7 +13,7 @@ public class EnderecoEntity {
 
     private String logradouro;
     private String bairro;
-    private Long cep;
+    private String cep;
     private Integer numero;
     private String complemento;
     private String cidade;
