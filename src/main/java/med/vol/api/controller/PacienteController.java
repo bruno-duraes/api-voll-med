@@ -2,16 +2,17 @@ package med.vol.api.controller;
 
 import jakarta.validation.Valid;
 import med.vol.api.paciente.CadastroPacienteDTO;
+import med.vol.api.paciente.PacienteDTO;
 import med.vol.api.paciente.PacienteEntity;
 import med.vol.api.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/pacientes")
 public class PacienteController {
 
     @Autowired
@@ -19,5 +20,10 @@ public class PacienteController {
     @PostMapping
     public void cadastrar(@RequestBody @Valid CadastroPacienteDTO cadastroPacienteDTO){
         repository.save(new PacienteEntity(cadastroPacienteDTO));
+    }
+
+    @GetMapping
+    public Page<PacienteDTO> listar(@PageableDefault(sort = "nome", size = 10) Pageable paginacao){
+        return repository.findAll(paginacao).map(PacienteDTO::new);
     }
 }
