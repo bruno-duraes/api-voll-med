@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import med.vol.api.endereco.EnderecoEntity;
+import org.apache.commons.lang3.StringUtils;
 
 @Table(name = "medico")
 @Entity(name = "MedicoEntity")
@@ -36,5 +37,19 @@ public class MedicoEntity {
         this.telefone = cadastroMedicoDTO.getTelefone();
         this.especialidade = cadastroMedicoDTO.getEspecialidade();
         this.endereco = new EnderecoEntity(cadastroMedicoDTO.getEndereco());
+    }
+
+    public void atualizarMedico(AtualizarMedicoDTO atualizarMedicoDTO) {
+        if((StringUtils.isNotBlank(atualizarMedicoDTO.getNome()))){
+            this.nome = atualizarMedicoDTO.getNome();
+        }
+
+        if(StringUtils.isNotBlank(atualizarMedicoDTO.getEmail())){
+            this.email = atualizarMedicoDTO.getEmail();
+        }
+
+        if(atualizarMedicoDTO.getEndereco() != null){
+            this.endereco.atualizarEndereco(atualizarMedicoDTO.getEndereco());
+        }
     }
 }
