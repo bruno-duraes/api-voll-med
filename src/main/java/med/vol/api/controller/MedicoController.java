@@ -23,4 +23,10 @@ public class MedicoController {
     public void cadastrar(@RequestBody @Valid CadastroMedicoDTO cadastroMedicoDTO){
         medicoRepository.save(new MedicoEntity(cadastroMedicoDTO));
     }
+
+    @GetMapping
+    public Page<MedicoDTO> listar(@PageableDefault(sort = "nome", size = 10) Pageable paginacao){
+        return medicoRepository.findAll(paginacao).map(MedicoDTO::new);
+    }
+
 }
