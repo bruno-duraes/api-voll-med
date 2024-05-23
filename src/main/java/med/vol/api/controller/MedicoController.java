@@ -1,15 +1,15 @@
 package med.vol.api.controller;
 
 import jakarta.validation.Valid;
-import med.vol.api.medico.CadastroMedicoDTO;
-import med.vol.api.medico.MedicoEntity;
-import med.vol.api.medico.MedicoRepository;
+import med.vol.api.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/medicos")
@@ -29,4 +29,11 @@ public class MedicoController {
         return medicoRepository.findAll(paginacao).map(MedicoDTO::new);
     }
 
+    @PutMapping
+    @Transactional
+    public void atualizar(@Valid @RequestBody AtualizarMedicoDTO atualizarMedicoDTO){
+
+        var medico = medicoRepository.getReferenceById(atualizarMedicoDTO.getId());
+        medico.atualizarMedico(atualizarMedicoDTO);
+    }
 }
